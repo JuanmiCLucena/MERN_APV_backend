@@ -19,7 +19,7 @@ app.use(function(req, res, next){
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, accept, access-control-allow-origin');
 
-    if ('OPTIONS' == req.method) res.send(200);
+    if ('OPTIONS' == req.method) res.sendStatus(200);
     else next();
 });
 
