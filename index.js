@@ -13,17 +13,15 @@ conectarDB();
 
 const dominiosPermitidos = [process.env.FRONTEND_URL];
 
-const corsOptions = {
-    origin: function(origin, callback) {
-        if (dominiosPermitidos.indexOf(origin) !== -1) {
-            // El Origen del Request está permitido
-            callback(null, true);
-        } else {
-            callback(new Error('No permitido por CORS'));
-        }
-    },
-    credentials: true
-}
+/** CORS setting with OPTIONS pre-flight handling */
+app.use(function(req, res, next){
+    res.header('Access-Control-Allow-Origin', dominiosPermitidos);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, accept, access-control-allow-origin');
+
+    if ('OPTIONS' == req.method) res.send(200);
+    else next();
+});
 
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
