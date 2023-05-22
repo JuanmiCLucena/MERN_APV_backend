@@ -23,8 +23,7 @@ app.use(function(req, res, next){
     else next();
 });
 
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+
 
 app.use('/api/veterinarios', veterinarioRoutes);
 app.use('/api/pacientes', pacienteRoutes);
